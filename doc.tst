@@ -179,6 +179,8 @@ object tst_parser {
       (emacs
         (A simple mode for editing .tst files is:
 
+          (code (emacs-lisp)
+          
 (require 'generic-x) ;; we need this
 
 (define-generic-mode 
@@ -197,9 +199,9 @@ object tst_parser {
   "A mode for tst files"            ;; doc string for this mode
   )
 
-          ;;          
+          ;; comment to ensure code is not parsed as children         
           
-          ))
+          )))
 
       )
 

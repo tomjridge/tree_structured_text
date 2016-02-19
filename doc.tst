@@ -175,7 +175,33 @@ object tst_parser {
 
 
     (section (Tools)
-      (Describe some tools that can format the text to html, latex, etc.))
+      (# describe some tools that can format the text to html, latex, etc.)
+      (emacs
+        (A simple mode for editing .tst files is:
+
+(require 'generic-x) ;; we need this
+
+(define-generic-mode 
+    'tst-mode                         ;; name of the mode to create
+  '() 
+  '()                     ;; some keywords
+  '()     ;; is a built-in 
+  '("\\.tst$")                      ;; files for which to activate this mode 
+  (list
+   (lambda ()
+     (set (make-local-variable 'indent-line-function) #'foo-indent-function)
+     (outline-minor-mode)
+     (set (make-local-variable 'outline-regexp) "[ \t]*[(]")
+     (set-fill-column 100)
+   ))
+  "A mode for tst files"            ;; doc string for this mode
+  )
+
+          ;;          
+          
+          ))
+
+      )
 
     )
   )

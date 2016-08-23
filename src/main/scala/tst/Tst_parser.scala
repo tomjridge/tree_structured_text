@@ -43,6 +43,38 @@ object Tst_parser {
     def pprint(n0: Tst_node): String = pprint(n0, 0)
 
   }
+
+  object pp_md {
+
+    import scala.util.matching.Regex
+
+    def regexp(p: Regex) = {
+      object x {
+        def validate(x: Tst_node) = {
+          p.findPrefixOf(x.lbl) match {
+            case Some(_) => true
+            case _       => false
+          }
+        }
+      }
+      x
+    }
+
+
+    def pprint(n0:Tst_node): String = {
+      // search for all nodes with label md, and print children
+      if (regexp("md[ ]*".r).validate(n0)) {
+        // print children
+        n0.cs.map { x => x.lbl }.mkString("\n")
+        // don't need to apply recursively
+      } else {
+        // apply recursively
+        n0.cs.map(pprint _).mkString("\n")
+      }
+    }
+
+  }
+
   
   def parse_tst(s:String) : Tst_node = {
     block_to_tst(Block_parser.parse_balanced(s)._1)

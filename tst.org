@@ -1,0 +1,159 @@
+#+BEGIN_SRC scala :session mys
+
+1+2;
+
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+
+scala> def cwd = "/home/tr61/general"  // so that we can access the cwd from the script
+cwd: String
+
+scala> :load /tmp/tmp.TEcC9e7Dq3
+Loading /tmp/tmp.TEcC9e7Dq3...
+res4: Int = 3
+
+scala> println("123456789"+"end");
+123456789end
+#+end_example
+
+
+#+BEGIN_SRC scala :session mys
+
+:load /tmp/l/Dropbox/scala_workspace/tst/src/tst/tst_parser.scala
+import tst_parser._
+
+
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+
+scala> def cwd = "/home/tr61/general"  // so that we can access the cwd from the script
+cwd: String
+
+scala> :load /tmp/tmp.sKmGDvYfN5
+Loading /tmp/tmp.sKmGDvYfN5...
+Loading /tmp/l/Dropbox/scala_workspace/tst/src/tst/tst_parser.scala...
+<console>:1: error: illegal start of definition
+package tst
+^
+defined object tst_parser
+import tst_parser._
+
+scala> println("123456789"+"end");
+123456789end
+#+end_example
+
+
+#+BEGIN_SRC scala :session mys
+
+//parse_balanced("""(a (b c)   (d c)  )""")
+
+parse_balanced("""(a (b c)   (d c) and some more! (e f) )""")
+
+block_to_tst(parse_balanced("""(a (b c)   (d c) and some more! (e f) )""")._1)
+
+"[ \t]*".r.findFirstIn("   ")
+
+"1" * 10
+
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+
+scala> def cwd = "/home/tr61/general"  // so that we can access the cwd from the script
+cwd: String
+
+scala> :load /tmp/tmp.8VOWhyF6YN
+Loading /tmp/tmp.8VOWhyF6YN...
+res57: (tst_parser.Node, String) = (Node(List(Leaf(a ), Node(List(Leaf(b c))), Leaf(   ), Node(List(Leaf(d c))), Leaf( and some more! ), Node(List(Leaf(e f))), Leaf( ))),"")
+res58: tst_parser.Tst_node = Tst_node(a (b c)   (d c) and some more! ,List(Tst_node(e f,List())))
+res59: Option[String] = Some(   )
+res60: String = 1111111111
+
+scala> println("123456789"+"end");
+123456789end
+#+end_example
+
+
+
+#+BEGIN_SRC scala :session mys
+
+val s = scala.io.Source.fromFile("/tmp/l/general/tmp.tst").mkString
+val r = block_to_tst(parse_balanced(s)._1)
+val t = (pprint(r))
+
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+
+scala> def cwd = "/home/tr61/general"  // so that we can access the cwd from the script
+cwd: String
+
+scala> :load /tmp/tmp.epaR9PGT55
+Loading /tmp/tmp.epaR9PGT55...
+s: String =
+"(
+(meta
+(title Tree-structured text, RFC)
+(author Tom Ridge)
+(date 2016-02-18))
+
+(body
+(section (Introduction)
+
+(# structure: informal intro; formal grammar)
+
+(This document describes the tree-structured text format. This is a plain-text format that is
+human-readable and also capable of being manipulated easily by machines.
+
+Tree-structured text (TST) is similar to XML, HTML and S-expressions. It also has
+similarities with JSON and YAML. The primary aim of TST is to represent a tree
+structure. The structure is encoded using "normal" brackets. A tree is initiated using the
+open bracket '(', and closed using the closing bracket ')'.
+
+The structure of the text between the brackets conforms to the following grammar:)
+
+(ver...r: tst_parser.Tst_node =
+Tst_node(,List(Tst_node(meta
+,List(Tst_node(title Tree-structured text, RFC,List()), Tst_node(author Tom Ridge,List()), Tst_node(date 2016-02-18,List()))), Tst_node(body
+,List(Tst_node(section ,List(Tst_node(Introduction,List()), Tst_node(# structure: informal intro; formal grammar,List()), Tst_node(This document describes the tree-structured text format. This is a plain-text format that is
+human-readable and also capable of being manipulated easily by machines.
+
+Tree-structured text (TST) is similar to XML, HTML and S-expressions. It also has
+similarities with JSON and YAML. The primary aim of TST is to represent a tree
+structure. The structure is encoded using "normal" brackets. A tree is initiated using the
+open bracket '(', ...t: String =
+(
+XX(meta
+
+XXXX(title Tree-structured text, RFC
+)
+XXXX(author Tom Ridge
+)
+XXXX(date 2016-02-18
+))
+XX(body
+
+XXXX(section
+XXXXXX(Introduction
+)
+XXXXXX(# structure: informal intro; formal grammar
+)
+XXXXXX(This document describes the tree-structured text format. This is a plain-text format that is
+human-readable and also capable of being manipulated easily by machines.
+
+Tree-structured text (TST) is similar to XML, HTML and S-expressions. It also has
+similarities with JSON and YAML. The primary aim of TST is to represent a tree
+structure. The structure is encoded using "normal" brackets. A tree is initiated using the
+open bracket '(', and closed using the closing bracket ')'.
+
+The structure of the text between the brackets conforms to the foll...
+scala> println("123456789"+"end");
+123456789end
+#+end_example
+

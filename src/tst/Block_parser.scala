@@ -12,7 +12,7 @@ object Block_parser {
     }
   }
 
-  // parse something that loks like: ( ... ( ... ) ... ( ... ) ... )
+  // parse something that looks like: ( ... ( ... ) ... ( ... ) ... )
   def parse_balanced(s: String): (Node, String) = {
     if (s.startsWith("(")) {
       val (cs, s_ab) = parse_string_block_list(s.substring(1));

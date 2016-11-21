@@ -136,7 +136,7 @@ package object tst {
       block_to_tst(Block_parser.parse_balanced(s)._1)
     }
     
-    def main(args: Array[String]) {
+    def main(args: Array[String]) : Unit = {
       parse_balanced("""(a (b c)   (d c)  )""")
     }
 
@@ -181,7 +181,7 @@ package object tst {
 
     // test
 
-    def main(args: Array[String]) {
+    def main(args: Array[String]) : Unit = {
       val x = Tst_parser.parse_tst("""(a (b c)   (c c)  )""")
       println(s"Validates: ${validate_a(x)}")
       val x2 = Tst_parser.parse_tst("""(a (b c)   (d c)  )""")
